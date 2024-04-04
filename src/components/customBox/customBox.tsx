@@ -35,21 +35,13 @@ const CustomBox = ({
   const boxTextColor = item.color === SELECTED_BOX_COLOR ? WHITE : BLACK;
   const boxWidth = 1 / gridSize;
   const boxHeight = 1 / gridSize;
+
   const handleClick = () => {
-    // let selectedBoxes: BoxItemType[] = [];
-    // selected.forEach((row) => {
-    //   row.forEach((item) => {
-    //     if (item.clicked) {
-    //       selectedBoxes = [...selectedBoxes, item];
-    //     }
-    //   });
-    // });
     const isBoxSelected = selectedBoxes.some(
       (box) => parseInt(box.i + "" + box.j) === index
     );
 
     if (selectedBoxes.length < 2 && !isBoxSelected) {
-      // console.log("if working");
       setGridBoxes((prev) => {
         const formattedArray = prev.map((row, i) => {
           return row.map((item, j) => {
@@ -66,7 +58,6 @@ const CustomBox = ({
         return formattedArray;
       });
       setSelectedBoxes((prev) => {
-        // console.log("prev1", prev, item);
         return [
           ...prev,
           {
@@ -77,10 +68,6 @@ const CustomBox = ({
         ];
       });
     } else {
-      // console.log(
-      //   "else working",
-      //   selectedBoxes.filter((box) => parseInt(box.i + "" + box.j) === index)
-      // );
       if (isBoxSelected) {
         setGridBoxes((prev) => {
           const formattedArray = prev.map((row, i) => {
@@ -98,10 +85,6 @@ const CustomBox = ({
           return formattedArray;
         });
         setSelectedBoxes((prev) => {
-          // console.log(
-          //   "prev2",
-          //   prev.filter((box) => parseInt(box.i + "" + box.j) !== index)
-          // );
           return prev.filter((box) => parseInt(box.i + "" + box.j) !== index);
         });
       }
@@ -109,9 +92,7 @@ const CustomBox = ({
   };
 
   useEffect(() => {
-    // console.log(index);
-
-    //to check if the box is present in the pathArray
+    //To check if the box is present in the pathArray
     const isBoxSelected = pathArray
       .slice(1, -1)
       .some((box) => parseInt(box.i + "" + box.j) === index);

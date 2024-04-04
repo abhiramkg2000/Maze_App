@@ -39,15 +39,6 @@ const CustomGrid = () => {
   };
 
   const handleStart = () => {
-    // let selectedBoxes: BoxItemType[] = [];
-    // selected.forEach((row) => {
-    //   row.forEach((item) => {
-    //     if (item.clicked) {
-    //       selectedBoxes = [...selectedBoxes, item];
-    //     }
-    //   });
-    // });
-    // console.log(findPath(selected, selectedBoxes));
     setPathArray(findPath(gridBoxes, selectedBoxes) || []);
   };
 

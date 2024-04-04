@@ -25,92 +25,27 @@ export const findPath = (
   selectedArray: BoxItemType[][],
   seletedBoxes: BoxItemType[]
 ) => {
-  // console.log(...seletedBoxes);
   if (seletedBoxes.length === 2) {
     let path: BoxItemType[] = [];
+
     const startingRow = seletedBoxes[0].i;
     const startingColumn = seletedBoxes[0].j;
     const endingRow = seletedBoxes[1].i;
     const endingColumn = seletedBoxes[1].j;
+
     let r = startingRow;
     let c = startingColumn;
+
     path.push(selectedArray[startingRow][startingColumn]);
-    // console.log(startingRow, startingColumn, endingRow, endingColumn);
-    // selectedArray.forEach((row, i) => {
-    // row.forEach((_, j) => {
-    // //startingRow < endingRow
-    // if (startingRow < endingRow && startingColumn < endingColumn) {
-    //   const item = selectedArray[i + 1][j + 1];
-    //   console.log(item);
-    //   path.push(item);
-    // } else if (startingRow < endingRow && startingColumn === endingColumn) {
-    //   path.push(selectedArray[i + 1][j]);
-    // } else if (startingRow === endingRow && startingColumn < endingColumn) {
-    //   path.push(selectedArray[i][j + 1]);
-    // }
-    // //startingRow > endingRow
-    // else if (startingRow > endingRow && startingColumn > endingColumn) {
-    //   path.push(selectedArray[i - 1][j - 1]);
-    // } else if (startingRow > endingRow && startingColumn === endingColumn) {
-    //   path.push(selectedArray[i - 1][j]);
-    // } else if (startingRow === endingRow && startingColumn > endingColumn) {
-    //   path.push(selectedArray[i][j - 1]);
-    // }
-    //startingRow < endingRow
-    // if (
-    //   i >= startingRow &&
-    //   i <= endingRow &&
-    //   j >= startingColumn &&
-    //   j <= endingColumn
-    // ) {
-    //   // //startingRow
-    //   // if (i === startingRow && j === startingColumn) {
-    //   //   console.log("8", i, j);
-    //   //   path.push(selectedArray[i][j]);
-    //   // }
-    //   if (i + 1 <= endingRow && j + 1 <= endingColumn) {
-    //     console.log("1", i, j);
-    //     path.push(selectedArray[i + 1][j + 1]);
-    //     (r = i + 1), (c = j + 1);
-    //   } else if (i + 1 < endingRow && j === endingColumn) {
-    //     console.log("2", i, j);
-    //     path.push(selectedArray[i + 1][j]);
-    //     (r = i + 1), (c = j);
-    //   } else if (i === endingRow && j + 1 < endingColumn) {
-    //     console.log("3", i, j);
-    //     path.push(selectedArray[i][j + 1]);
-    //     (r = i), (c = j + 1);
-    //   }
-    //   //startingRow > endingRow
-    //   else if (i - 1 > endingRow && j - 1 > endingColumn) {
-    //     console.log("4", i, j);
-    //     path.push(selectedArray[i - 1][j - 1]);
-    //     (r = i - 1), (c = j - 1);
-    //   } else if (i - 1 > endingRow && j === endingColumn) {
-    //     console.log("5", i, j);
-    //     path.push(selectedArray[i - 1][j]);
-    //     (r = i - 1), (c = j);
-    //   } else if (i === endingRow && j - 1 > endingColumn) {
-    //     console.log("6", i, j);
-    //     path.push(selectedArray[i][j - 1]);
-    //     (r = i), (c = j - 1);
-    //   }
-    //   //endingRow
-    //   else if (i === endingRow && j === endingColumn) {
-    //     console.log("7", i, j);
-    //     (r = i), (c = j);
-    //     path.push(selectedArray[i][j]);
-    //     (r = i), (c = j);
-    //   }
-    // }
+
     while (r != endingRow || c != endingColumn) {
-      // right diagonal(top to bottom)
+      // main diagonal
       if (r < endingRow && c < endingColumn) {
         r = r + 1;
         c = c + 1;
         path.push({ ...selectedArray[r][c], color: PATH_BOX_COLOR });
       }
-      // left diagonal(bottom to top)
+      // antidiagonal
       else if (r > endingRow && c > endingColumn) {
         r = r - 1;
         c = c - 1;
@@ -148,37 +83,6 @@ export const findPath = (
         r = r - 1;
         path.push({ ...selectedArray[r][c], color: PATH_BOX_COLOR });
       }
-      // //startingRow < endingRow
-      // if (startingRow < endingRow && startingColumn < endingColumn) {
-      //   const item = selectedArray[i + 1][j + 1];
-      //   console.log(item);
-      //   path.push(item);
-      // } else if (
-      //   startingRow < endingRow &&
-      //   startingColumn === endingColumn
-      // ) {
-      //   path.push(selectedArray[i + 1][j]);
-      // } else if (
-      //   startingRow === endingRow &&
-      //   startingColumn < endingColumn
-      // ) {
-      //   path.push(selectedArray[i][j + 1]);
-      // }
-
-      // //startingRow > endingRow
-      // else if (startingRow > endingRow && startingColumn > endingColumn) {
-      //   path.push(selectedArray[i - 1][j - 1]);
-      // } else if (
-      //   startingRow > endingRow &&
-      //   startingColumn === endingColumn
-      // ) {
-      //   path.push(selectedArray[i - 1][j]);
-      // } else if (
-      //   startingRow === endingRow &&
-      //   startingColumn > endingColumn
-      // ) {
-      //   path.push(selectedArray[i][j - 1]);
-      // }
     }
     // To change the last box color to SELECTED_BOX_COLOR
     if (r === endingRow && c === endingColumn) {
@@ -187,8 +91,6 @@ export const findPath = (
         color: SELECTED_BOX_COLOR,
       };
     }
-    // });
-    // });
     return path;
   }
 };
