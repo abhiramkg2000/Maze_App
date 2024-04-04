@@ -22,7 +22,7 @@ export const createGrid = (gridSize: number): BoxItemType[][] => {
 };
 
 export const findPath = (
-  selectedArray: BoxItemType[][],
+  gridBoxes: BoxItemType[][],
   seletedBoxes: BoxItemType[]
 ) => {
   if (seletedBoxes.length === 2) {
@@ -36,52 +36,52 @@ export const findPath = (
     let r = startingRow;
     let c = startingColumn;
 
-    path.push(selectedArray[startingRow][startingColumn]);
+    path.push(gridBoxes[startingRow][startingColumn]);
 
     while (r != endingRow || c != endingColumn) {
       // main diagonal
       if (r < endingRow && c < endingColumn) {
         r = r + 1;
         c = c + 1;
-        path.push({ ...selectedArray[r][c], color: PATH_BOX_COLOR });
+        path.push({ ...gridBoxes[r][c], color: PATH_BOX_COLOR });
       }
       // antidiagonal
       else if (r > endingRow && c > endingColumn) {
         r = r - 1;
         c = c - 1;
-        path.push({ ...selectedArray[r][c], color: PATH_BOX_COLOR });
+        path.push({ ...gridBoxes[r][c], color: PATH_BOX_COLOR });
       }
       // top to bottom
       else if (r < endingRow && c === endingColumn) {
         r = r + 1;
-        path.push({ ...selectedArray[r][c], color: PATH_BOX_COLOR });
+        path.push({ ...gridBoxes[r][c], color: PATH_BOX_COLOR });
       }
       // bottom to top
       else if (r > endingRow && c === endingColumn) {
         r = r - 1;
-        path.push({ ...selectedArray[r][c], color: PATH_BOX_COLOR });
+        path.push({ ...gridBoxes[r][c], color: PATH_BOX_COLOR });
       }
       // left to right
       else if (r === endingRow && c < endingColumn) {
         c = c + 1;
-        path.push({ ...selectedArray[r][c], color: PATH_BOX_COLOR });
+        path.push({ ...gridBoxes[r][c], color: PATH_BOX_COLOR });
       }
       // right to left
       else if (r === endingRow && c > endingColumn) {
         c = c - 1;
-        path.push({ ...selectedArray[r][c], color: PATH_BOX_COLOR });
+        path.push({ ...gridBoxes[r][c], color: PATH_BOX_COLOR });
       }
       // r < endingRow && c > endingColumn
       else if (r < endingRow && c > endingColumn) {
         c = c - 1;
         r = r + 1;
-        path.push({ ...selectedArray[r][c], color: PATH_BOX_COLOR });
+        path.push({ ...gridBoxes[r][c], color: PATH_BOX_COLOR });
       }
       // r > endingRow && c < endingColumn
       else if (r > endingRow && c < endingColumn) {
         c = c + 1;
         r = r - 1;
-        path.push({ ...selectedArray[r][c], color: PATH_BOX_COLOR });
+        path.push({ ...gridBoxes[r][c], color: PATH_BOX_COLOR });
       }
     }
     // To change the last box color to SELECTED_BOX_COLOR
