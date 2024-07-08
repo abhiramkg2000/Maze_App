@@ -22,6 +22,7 @@ const CustomGrid = () => {
   const [gridBoxes, setGridBoxes] = useState<BoxItemType[][]>([]);
   const [selectedBoxes, setSelectedBoxes] = useState<BoxItemType[]>([]);
   const [pathArray, setPathArray] = useState<BoxItemType[]>([]);
+  const [disabled, setDisabled] = useState(true);
 
   const handleClear = () => {
     setGridBoxes((prev) => {
@@ -39,6 +40,7 @@ const CustomGrid = () => {
   };
 
   const handleStart = () => {
+    setDisabled(true);
     setPathArray(findPath(gridBoxes, selectedBoxes) || []);
   };
 
@@ -70,13 +72,16 @@ const CustomGrid = () => {
                 selectedBoxes={selectedBoxes}
                 setSelectedBoxes={setSelectedBoxes}
                 pathArray={pathArray}
+                setDisabled={setDisabled}
               />
             ))
           )}
         </Grid>
       </Box>
       <Box className="button_group">
-        <CustomButton handleClick={handleStart}>start</CustomButton>
+        <CustomButton handleClick={handleStart} disabled={disabled}>
+          start
+        </CustomButton>
         <CustomButton handleClick={handleClear}>clear</CustomButton>
       </Box>
     </Box>

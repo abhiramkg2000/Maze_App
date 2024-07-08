@@ -21,6 +21,7 @@ type CustomBoxProps = {
   selectedBoxes: BoxItemType[];
   setSelectedBoxes: React.Dispatch<React.SetStateAction<BoxItemType[]>>;
   pathArray: BoxItemType[];
+  setDisabled: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const CustomBox = ({
@@ -31,6 +32,7 @@ const CustomBox = ({
   selectedBoxes,
   setSelectedBoxes,
   pathArray,
+  setDisabled,
 }: CustomBoxProps) => {
   const boxTextColor = item.color === SELECTED_BOX_COLOR ? WHITE : BLACK;
   const boxWidth = 1 / gridSize;
@@ -68,6 +70,9 @@ const CustomBox = ({
         ];
       });
     } else {
+      if (selectedBoxes.length === 2) {
+        setDisabled(false);
+      }
       if (isBoxSelected) {
         setGridBoxes((prev) => {
           const formattedArray = prev.map((row, i) => {
@@ -116,6 +121,15 @@ const CustomBox = ({
           });
           return formattedArray;
         });
+        if (
+          parseInt(
+            pathArray[pathArray.length - 2].i +
+              "" +
+              pathArray[pathArray.length - 2].j
+          ) === index
+        ) {
+          setDisabled(false);
+        }
       }, pathArray.findIndex((item) => parseInt(item.i + "" + item.j) === index) * 500); // Set the delay in milliseconds (e.g., 2000ms for 2 seconds)
 
       // Cleanup the timeout to avoid memory leaks
