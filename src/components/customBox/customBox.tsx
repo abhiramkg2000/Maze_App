@@ -141,8 +141,13 @@ const CustomBox = ({
         color: boxTextColor,
         width: `${boxWidth * 100}px`,
         height: `${boxHeight * 400}px`,
+        cursor: pathArray.length ? "default" : "pointer",
       }}
-      onClick={handleClick}
+      onClick={() => {
+        if (!pathArray.length) {
+          handleClick();
+        }
+      }}
     >
       <Box className="box">
         {item.i}
