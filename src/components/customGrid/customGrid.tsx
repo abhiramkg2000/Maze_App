@@ -40,7 +40,6 @@ const CustomGrid = () => {
   };
 
   const handleStart = () => {
-    setDisabled(true);
     setPathArray(findPath(gridBoxes, selectedBoxes) || []);
   };
 

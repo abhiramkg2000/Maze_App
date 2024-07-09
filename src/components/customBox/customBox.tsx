@@ -38,6 +38,12 @@ const CustomBox = ({
   const boxWidth = 1 / gridSize;
   const boxHeight = 1 / gridSize;
 
+  if (selectedBoxes.length === 2 && pathArray.length === 0) {
+    setDisabled(false);
+  } else {
+    setDisabled(true);
+  }
+
   const handleClick = () => {
     const isBoxSelected = selectedBoxes.some(
       (box) => parseInt(box.i + "" + box.j) === index
@@ -70,9 +76,6 @@ const CustomBox = ({
         ];
       });
     } else {
-      if (selectedBoxes.length === 2) {
-        setDisabled(false);
-      }
       if (isBoxSelected) {
         setGridBoxes((prev) => {
           const formattedArray = prev.map((row, i) => {
@@ -102,7 +105,7 @@ const CustomBox = ({
       .slice(1, -1)
       .some((box) => parseInt(box.i + "" + box.j) === index);
 
-    let timeoutId = 0;
+    let timeoutId: number;
 
     if (isBoxSelected) {
       timeoutId = setTimeout(() => {
@@ -121,16 +124,7 @@ const CustomBox = ({
           });
           return formattedArray;
         });
-        if (
-          parseInt(
-            pathArray[pathArray.length - 2].i +
-              "" +
-              pathArray[pathArray.length - 2].j
-          ) === index
-        ) {
-          setDisabled(false);
-        }
-      }, pathArray.findIndex((item) => parseInt(item.i + "" + item.j) === index) * 500); // Set the delay in milliseconds (e.g., 2000ms for 2 seconds)
+      }, pathArray.findIndex((item) => parseInt(item.i + "" + item.j) === index) * 500); // Sets the delay in milliseconds
 
       // Cleanup the timeout to avoid memory leaks
       return () => clearTimeout(timeoutId);
